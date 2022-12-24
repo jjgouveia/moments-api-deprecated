@@ -57,13 +57,43 @@ export default class MomentsController {
 
   public async destroy({ params: { id }, response }: HttpContextContract) {
     const moment = await Moment.findOrFail(id)
-
     await moment.delete()
-
     response.status(202)
 
     return {
       message: 'Momento Excluído com sucesso',
+      data: moment,
+    }
+  }
+
+  public async update({ params: { id }, request, response }: HttpContextContract) {
+    const body = request.body()
+
+    const moment = await Moment.findOrFail(id)
+
+    moment.title = body.title
+    moment.description = body.description
+
+    if (moment.image !== body.image || !moment.image) {
+      const image = request.file('image', this.validationOptions)
+
+      //cria um namefile único garantindo que dados não sejam sobrescritos no banco
+      const imageName = `${uuidv4()}.${image?.extname}`
+      //move as imagens para a past tmp/uploads do sistema e seta o nome escolhido
+      await image?.move(Application.tmpPath('uploads'), {
+        name: imageName,
+      })
+
+      //adiciona o mesmo nome ao body
+      body.image = imageName
+    }
+
+    await moment.save()
+
+    response.status(202)
+
+    return {
+      message: 'Moment atualizado',
       data: moment,
     }
   }
