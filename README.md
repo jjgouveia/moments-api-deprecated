@@ -19,8 +19,8 @@ A proposta deste projeto era a de arquitetar e desenvolver uma API RESTful integ
 * S.O.L.I.D
 * TypeScript/JavaScript
 * NodeJS
-* AdonisJS
-* Lucid ORM
+* [AdonisJS](https://adonisjs.com/)
+* [Lucid ORM](https://github.com/adonisjs/lucid)
 
 
 <!-- ## 🛠 Instalação local
