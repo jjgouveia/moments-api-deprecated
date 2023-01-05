@@ -20,8 +20,12 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+Route.post('/api/login', 'LoginController.store')
+
 Route.group(() => {
   Route.resource('/users', 'UsersController').apiOnly()
   Route.resource('/moments', 'PostsController').apiOnly()
   Route.post('/moments/:momentId/comment', 'CommentsController.store')
-}).prefix('/api')
+})
+  .prefix('/api')
+  .middleware('auth')

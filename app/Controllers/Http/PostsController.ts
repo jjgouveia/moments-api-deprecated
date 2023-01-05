@@ -17,8 +17,10 @@ export default class MomentsController {
 
   // public async create({}: HttpContextContract) {}
 
-  public async store({ request, response }: HttpContextContract) {
+  public async store({ request, response, auth }: HttpContextContract) {
     const data = request.body()
+
+    data.user_id = auth.user?.id
 
     const image = request.file('image', this.validationOptions)
 
