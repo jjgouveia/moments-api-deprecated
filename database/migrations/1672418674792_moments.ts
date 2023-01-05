@@ -14,6 +14,13 @@ export default class extends BaseSchema {
         .inTable('users')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
+      table
+        .string('posted_by')
+        .notNullable()
+        .references('username')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
       table.string('title')
       table.text('description')
       table.string('image')

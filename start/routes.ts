@@ -20,10 +20,19 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.post('/api/login', 'LoginController.store')
+Route.get('/', async () => {
+  return 'Deu bom'
+}).as('home')
+
+Route.post('/api/login', 'LoginController.store').as('login.store')
+Route.post('/api/users', 'UsersController.store').as('users.store')
 
 Route.group(() => {
-  Route.resource('/users', 'UsersController').apiOnly()
+  Route.get('/users', 'UsersController.index')
+  Route.get('/users/:id', 'UsersController.show')
+  Route.patch('/users/:id', 'UsersController.update')
+  Route.delete('/users/:id', 'UsersController.destroy')
+
   Route.resource('/moments', 'PostsController').apiOnly()
   Route.post('/moments/:momentId/comment', 'CommentsController.store')
 })

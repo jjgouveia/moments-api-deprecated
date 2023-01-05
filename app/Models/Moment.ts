@@ -14,6 +14,9 @@ export default class Moment extends BaseModel {
   public userId?: number
 
   @column()
+  public postedBy: number
+
+  @column()
   public title: string
 
   @column()
@@ -30,6 +33,9 @@ export default class Moment extends BaseModel {
 
   @belongsTo(() => User, {
     localKey: 'id',
+  })
+  @belongsTo(() => User, {
+    localKey: 'username',
   })
   public user: BelongsTo<typeof User>
 }

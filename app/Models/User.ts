@@ -47,5 +47,8 @@ export default class User extends BaseModel {
   @hasMany(() => Moment, {
     foreignKey: 'userId',
   })
+  @hasMany(() => Moment, {
+    foreignKey: 'postedBy',
+  })
   public moments: HasMany<typeof Moment>
 }

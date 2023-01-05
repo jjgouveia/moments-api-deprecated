@@ -21,6 +21,7 @@ export default class MomentsController {
     const data = request.body()
 
     data.user_id = auth.user?.id
+    data.posted_by = auth.user?.username
 
     const image = request.file('image', this.validationOptions)
 
