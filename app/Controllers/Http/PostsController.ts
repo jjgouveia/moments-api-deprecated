@@ -12,7 +12,9 @@ export default class MomentsController {
   public async index({}: HttpContextContract) {
     const moment = await Moment.query().preload('comments').orderBy('id', 'desc')
 
-    return moment
+    return {
+      data: moment,
+    }
   }
 
   // public async create({}: HttpContextContract) {}
@@ -60,7 +62,9 @@ export default class MomentsController {
 
     await moment.load('comments')
 
-    return moment
+    return {
+      data: moment,
+    }
   }
 
   public async edit({}: HttpContextContract) {}
